@@ -98,9 +98,9 @@
 #define wxID_WINDOW_DOWNLOADSPLITTER                                  ID_USER_START+67
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Class jxFrame
+/// Class mainFrame
 ///////////////////////////////////////////////////////////////////////////////
-class jxFrame : public wxFrame 
+class mainFrame : public wxFrame 
 {
 	private:
 	
@@ -200,8 +200,8 @@ class jxFrame : public wxFrame
 
 	
 	public:
-		jxFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("jinxian downloader"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 530,495 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
-		~jxFrame();
+		mainFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("jinxian downloader"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 530,495 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		~mainFrame();
 };
 
 ///////////////////////////////////////////////////////////////////////////////

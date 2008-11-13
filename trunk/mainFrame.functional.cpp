@@ -8,7 +8,7 @@
  **************************************************************/
 
 #include "pre_config.h"
-#include "jxFrame.h"
+#include "mainFrame.h"
 #include "icons/toolbar_invalid.xpm"
 #include "icons/toolbar_enable.xpm"
 #include "NewDownload.h"
@@ -31,7 +31,7 @@
 	//	void initBitmap(const wxBitmap& xpm, int index );
 	//	void initialize();
 
-void jxFrame::initialize()
+void mainFrame::initialize()
 {
 
 	wxBitmap invalid_bitmap( toolbar_invalid );
@@ -40,7 +40,7 @@ void jxFrame::initialize()
 	initBitmap( enable_bitmap, 1 );
 }
 
-void jxFrame::initBitmap(const wxBitmap& xpm, int index )
+void mainFrame::initBitmap(const wxBitmap& xpm, int index )
 {
 	m_bitmap_browse_folder[index] = xpm.GetSubBitmap( wxRect(5 *24, 0, 24,24 ) );
 	m_bitmap_delete_download[index] = xpm.GetSubBitmap( wxRect(3 *24, 0, 24,24 ) );
@@ -57,296 +57,296 @@ void jxFrame::initBitmap(const wxBitmap& xpm, int index )
 }
 
 
-void jxFrame::initializeCategoryTree()
+void mainFrame::initializeCategoryTree()
 {
 }
 
-void jxFrame::initializeDownloadList()
+void mainFrame::initializeDownloadList()
 {
 }
 
-void jxFrame::on_new_download( wxCommandEvent& e )
+void mainFrame::on_new_download( wxCommandEvent& e )
 {
 	NewDownload* download = new NewDownload( this );
     download->ShowModal();
 }
 
-void jxFrame::on_add_batch_dwonload( wxCommandEvent& e )
+void mainFrame::on_add_batch_dwonload( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_launch_dwonload_file( wxCommandEvent& e )
+void mainFrame::on_launch_dwonload_file( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_browse_folder( wxCommandEvent& e )
+void mainFrame::on_browse_folder( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_check_for_file_update( wxCommandEvent& e )
+void mainFrame::on_check_for_file_update( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_download_again( wxCommandEvent& e )
+void mainFrame::on_download_again( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_start_download( wxCommandEvent& e )
+void mainFrame::on_start_download( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_pause_download( wxCommandEvent& e )
+void mainFrame::on_pause_download( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_schedule_download( wxCommandEvent& e )
+void mainFrame::on_schedule_download( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_start_all_downloads( wxCommandEvent& e )
+void mainFrame::on_start_all_downloads( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_pause_all_downloads( wxCommandEvent& e )
+void mainFrame::on_pause_all_downloads( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_import_download_list( wxCommandEvent& e )
+void mainFrame::on_import_download_list( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_import_broken_downloads( wxCommandEvent& e )
+void mainFrame::on_import_broken_downloads( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_import_links_from_local_file( wxCommandEvent& e )
+void mainFrame::on_import_links_from_local_file( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_export_download_list( wxCommandEvent& e )
+void mainFrame::on_export_download_list( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_export_download_information( wxCommandEvent& e )
+void mainFrame::on_export_download_information( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_exit( wxCommandEvent& e )
+void mainFrame::on_exit( wxCommandEvent& e )
 {
 	Close(); 
 }
 
-void jxFrame::on_select_all_downloads( wxCommandEvent& e )
+void mainFrame::on_select_all_downloads( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_invert_selection( wxCommandEvent& e )
+void mainFrame::on_invert_selection( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_find_download( wxCommandEvent& e )
+void mainFrame::on_find_download( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_find_next_download( wxCommandEvent& e )
+void mainFrame::on_find_next_download( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_move_up( wxCommandEvent& e )
+void mainFrame::on_move_up( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_move_down( wxCommandEvent& e )
+void mainFrame::on_move_down( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_delete_download( wxCommandEvent& e )
+void mainFrame::on_delete_download( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_move_to( wxCommandEvent& e )
+void mainFrame::on_move_to( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_copy_url_to_clipbroad( wxCommandEvent& e )
+void mainFrame::on_copy_url_to_clipbroad( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_show_detail_panel( wxCommandEvent& e )
+void mainFrame::on_show_detail_panel( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_drop_zone_window( wxCommandEvent& e )
+void mainFrame::on_drop_zone_window( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_show_class_panel( wxCommandEvent& e )
+void mainFrame::on_show_class_panel( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_export_download_file( wxCommandEvent& e )
+void mainFrame::on_export_download_file( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_rename_file( wxCommandEvent& e )
+void mainFrame::on_rename_file( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_rename_commet_as_filename( wxCommandEvent& e )
+void mainFrame::on_rename_commet_as_filename( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_new_category( wxCommandEvent& e )
+void mainFrame::on_new_category( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_move_category_to( wxCommandEvent& e )
+void mainFrame::on_move_category_to( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_delete_category( wxCommandEvent& e )
+void mainFrame::on_delete_category( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_show_category_properties_window( wxCommandEvent& e )
+void mainFrame::on_show_category_properties_window( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_new_database( wxCommandEvent& e )
+void mainFrame::on_new_database( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_open_database( wxCommandEvent& e )
+void mainFrame::on_open_database( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_merge_database( wxCommandEvent& e )
+void mainFrame::on_merge_database( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_save_database( wxCommandEvent& e )
+void mainFrame::on_save_database( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_backup_to_database( wxCommandEvent& e )
+void mainFrame::on_backup_to_database( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_imprt_previous_file_to_database( wxCommandEvent& e )
+void mainFrame::on_imprt_previous_file_to_database( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_imprt_previous_batch_file_to_database( wxCommandEvent& e )
+void mainFrame::on_imprt_previous_batch_file_to_database( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_show_download_properties_window( wxCommandEvent& e )
+void mainFrame::on_show_download_properties_window( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_show_properties_history_window( wxCommandEvent& e )
+void mainFrame::on_show_properties_history_window( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_connect_or_disconnect( wxCommandEvent& e )
+void mainFrame::on_connect_or_disconnect( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_save_option_as_defauilt( wxCommandEvent& e )
+void mainFrame::on_save_option_as_defauilt( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_show_option_window( wxCommandEvent& e )
+void mainFrame::on_show_option_window( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_goto_online_help( wxCommandEvent& e )
+void mainFrame::on_goto_online_help( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_check_for_a_new_version( wxCommandEvent& e )
+void mainFrame::on_check_for_a_new_version( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_about( wxCommandEvent& e )
+void mainFrame::on_about( wxCommandEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_main_splitter_sash_position_changed( wxSplitterEvent& e )
+void mainFrame::on_main_splitter_sash_position_changed( wxSplitterEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_category_right_click( wxTreeEvent& e )
+void mainFrame::on_category_right_click( wxTreeEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_category_select_changed( wxTreeEvent& e )
+void mainFrame::on_category_select_changed( wxTreeEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_download_list_select_changed( wxListEvent& e )
+void mainFrame::on_download_list_select_changed( wxListEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_download_threads_right_click( wxTreeEvent& e )
+void mainFrame::on_download_threads_right_click( wxTreeEvent& e )
 {
 	e.Skip(); 
 }
 
-void jxFrame::on_download_list_select_changed( wxTreeEvent& e )
+void mainFrame::on_download_list_select_changed( wxTreeEvent& e )
 {
 	e.Skip(); 
 }

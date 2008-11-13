@@ -18,11 +18,8 @@ class jxApp : public wxApp
     public:
         virtual bool OnInit();
 
-		wxFileSystem& GetFileSystem();
-
 	private:
 	    wxFrame* m_frame;
-		wxFileSystem m_virtualFS;
 };
 
 DECLARE_APP(jxApp)

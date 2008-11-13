@@ -6,10 +6,10 @@
 ///////////////////////////////////////////////////////////////////////////
 
 #include "pre_config.h"
-#include "jxFrame.h"
+#include "mainFrame.h"
 
 ///////////////////////////////////////////////////////////////////////////
-jxFrame::jxFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
+mainFrame::mainFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
 	initialize();
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
@@ -19,7 +19,7 @@ jxFrame::jxFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	createToolBar();
 
 	wxSplitterWindow* mainSplitter = new wxSplitterWindow( this, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), 0 );
-	//mainSplitter->Connect( wxEVT_IDLE, wxIdleEventHandler( jxFrame::on_splitterOnIdle ), NULL, this );
+	//mainSplitter->Connect( wxEVT_IDLE, wxIdleEventHandler( mainFrame::on_splitterOnIdle ), NULL, this );
 
 	mainSplitter->SplitVertically( createTreePanel( mainSplitter ), createDownloadPanel( mainSplitter ), 150 );
 
@@ -30,159 +30,159 @@ jxFrame::jxFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 	this->Layout();
 	
 	// Connect Events
-	this->Connect( wxID_COMMAND_MENU_NEW_DOWNLOAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_new_download ) );
-	this->Connect( wxID_COMMAND_MENU_ADD_BATCH_DOWNLOAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_add_batch_dwonload ) );
-	this->Connect( wxID_COMMAND_MENU_LAUNCH_DOWNLOAD_FILE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_launch_dwonload_file ) );
-	this->Connect( wxID_COMMAND_MENU_BROWSE_FOLDER, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_browse_folder ) );
-	this->Connect( wxID_COMMAND_MENU_CHECK_FOR_FILE_UPDATE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_check_for_file_update ) );
-	this->Connect( wxID_COMMAND_MENU_DOWNLOAD_AGAIN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_download_again ) );
-	this->Connect( wxID_COMMAND_MENU_START_DOWNLOAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_start_download ) );
-	this->Connect( wxID_COMMAND_MENU_PAUSE_DOWNLOAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_pause_download ) );
-	this->Connect( wxID_COMMAND_MENU_SCHEDULE_DOWNLOAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_schedule_download ) );
-	this->Connect( wxID_COMMAND_MENU_START_DOWNLOAD_ALL, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_start_all_downloads ) );
-	this->Connect( wxID_COMMAND_MENU_PAUSE_DOWNLOAD_ALL, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_pause_all_downloads ) );
-	this->Connect( wxID_COMMAND_MENU_IMPORT_DOWNLOAD_LIST, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_import_download_list ) );
-	this->Connect( wxID_COMMAND_MENU_IMPORT_BROKEN_DOWNLOADS, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_import_broken_downloads ) );
-	this->Connect( wxID_COMMAND_MENU_IMPORT_LINKS_FROM_LOCAL_FILE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_import_links_from_local_file ) );
-	this->Connect( wxID_COMMAND_MENU_EXPORT_DOWNLOAD_LIST, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_export_download_list ) );
-	this->Connect( wxID_COMMAND_MENU_EXPORT_DOWNLOAD_INFORMATION, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_export_download_information ) );
-	this->Connect( wxID_COMMAND_MENU_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_exit ) );
-	this->Connect( wxID_COMMAND_MENU_SELECT_ALL, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_select_all_downloads ) );
-	this->Connect( wxID_COMMAND_MENU_INVERT_SELECTION, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_invert_selection ) );
-	this->Connect( wxID_COMMAND_MENU_FIND, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_find_download ) );
-	this->Connect( wxID_COMMAND_MENU_FIND_NEXT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_find_next_download ) );
-	this->Connect( wxID_COMMAND_MENU_MOVE_UP, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_move_up ) );
-	this->Connect( wxID_COMMAND_MENU_MOVE_DOWN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_move_down ) );
-	this->Connect( wxID_COMMAND_MENU_DELETE_DOWNLOAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_delete_download ) );
-	this->Connect( wxID_COMMAND_MENU_MOVE_TO, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_move_to ) );
-	this->Connect( wxID_COMMAND_MENU_COPY_URL_TO_CLIPBROAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_copy_url_to_clipbroad ) );
-	this->Connect( wxID_COMMAND_MENU_VIEW_DETAIL, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_show_detail_panel ) );
-	this->Connect( wxID_COMMAND_MENU_VIEW_DROP_ZONE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_drop_zone_window ) );
-	this->Connect( wxID_COMMAND_MENU_VIEW_CATEGORY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_show_class_panel ) );
-	this->Connect( wxID_COMMAND_MENU_EXPORT_DOWNLOAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_export_download_file ) );
-	this->Connect( wxID_COMMAND_MENU_RENAME_FILE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_rename_file ) );
-	this->Connect( wxID_COMMAND_MENU_COMMET_AS_FILENAME, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_rename_commet_as_filename ) );
-	this->Connect( wxID_COMMAND_MENU_NEW_CATEGORY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_new_category ) );
-	this->Connect( wxID_COMMAND_MENU_MOVE_CATEGORY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_move_category_to ) );
-	this->Connect( wxID_COMMAND_MENU_DELETE_CATEGORY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_delete_category ) );
-	this->Connect( wxID_COMMAND_MENU_CATEGORY_PROPERTIES, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_show_category_properties_window ) );
-	this->Connect( wxID_COMMAND_MENU_NEW_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_new_database ) );
-	this->Connect( wxID_COMMAND_MENU_OPEN_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_open_database ) );
-	this->Connect( wxID_COMMAND_MENU_MERGE_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_merge_database ) );
-	this->Connect( wxID_COMMAND_MENU_SAVE_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_save_database ) );
-	this->Connect( wxID_COMMAND_MENU_BACKUP_TO_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_backup_to_database ) );
-	this->Connect( wxID_COMMAND_MENU_IMPORT_DATABASE_FROM_PREVIOUS_FILE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_imprt_previous_file_to_database ) );
-	this->Connect( wxID_COMMAND_MENU_IMPORT_DATABASE_FROM_PREVIOUS_BATCH_FILE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_imprt_previous_batch_file_to_database ) );
-	this->Connect( wxID_COMMAND_MENU_VIEW_DOWNLOAD_PROPERTIES, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_show_download_properties_window ) );
-	this->Connect( wxID_COMMAND_MENU_VIEW_PROPERTIES_HISTORY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_show_properties_history_window ) );
-	this->Connect( wxID_COMMAND_MENU_CONNECT_OR_DISCONNECT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_connect_or_disconnect ) );
-	this->Connect( wxID_COMMAND_MENU_SAVE_AS_DEFAULT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_save_option_as_defauilt ) );
-	this->Connect( wxID_COMMAND_MENU_SHOW_DEFAULT_DOWNLOAD_PROPERTIES, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_show_download_properties_window ) );
-	this->Connect( wxID_COMMAND_MENU_OPTIONS, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_show_option_window ) );
-	this->Connect( wxID_COMMAND_MENU_HELP, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_goto_online_help ) );
-	this->Connect( wxID_COMMAND_MENU_CHECK_FOR_A_NEW_VERSION, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_check_for_a_new_version ) );
-	this->Connect( wxID_COMMAND_MENU_ABOUT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_about ) );
-	this->Connect( wxID_COMMAND_TOOL_NEW_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_new_download ) );
-	this->Connect( wxID_COMMAND_TOOL_START_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_start_download ) );
-	this->Connect( wxID_COMMAND_TOOL_PAUSE_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_pause_download ) );
-	this->Connect( wxID_COMMAND_TOOL_DELETE_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_delete_download ) );
-	this->Connect( wxID_COMMAND_TOOL_OPEN_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_launch_dwonload_file ) );
-	this->Connect( wxID_COMMAND_TOOL_BROWSE_FOLDER, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_browse_folder ) );
-	this->Connect( wxID_COMMAND_TOOL_DOWNLOAD_PROPERTIES, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_show_download_properties_window ) );
-	this->Connect( wxID_COMMAND_TOOL_MOVE_UP, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_move_up ) );
-	this->Connect( wxID_COMMAND_TOOL_MOVE_DOWN, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_move_down ) );
-	this->Connect( wxID_COMMAND_TOOL_DOWNLOAD_OPTION, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_show_option_window ) );
-	this->Connect( wxID_COMMAND_TOOL_FIND_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_find_download ) );
-	this->Connect( wxID_COMMAND_TOOL_FIND_NEXT_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_find_next_download ) );
-	//mainSplitter->Connect( wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED, wxSplitterEventHandler( jxFrame::on_main_splitter_sash_position_changed ), NULL, this );
-	m_category_tree->Connect( wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK, wxTreeEventHandler( jxFrame::on_category_right_click ), NULL, this );
-	m_category_tree->Connect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( jxFrame::on_category_select_changed ), NULL, this );
-	m_download_list->Connect( wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler( jxFrame::on_download_list_select_changed ), NULL, this );
-	m_download_thread_view->Connect( wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK, wxTreeEventHandler( jxFrame::on_download_threads_right_click ), NULL, this );
-	m_download_thread_view->Connect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( jxFrame::on_download_list_select_changed ), NULL, this );
+	this->Connect( wxID_COMMAND_MENU_NEW_DOWNLOAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_new_download ) );
+	this->Connect( wxID_COMMAND_MENU_ADD_BATCH_DOWNLOAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_add_batch_dwonload ) );
+	this->Connect( wxID_COMMAND_MENU_LAUNCH_DOWNLOAD_FILE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_launch_dwonload_file ) );
+	this->Connect( wxID_COMMAND_MENU_BROWSE_FOLDER, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_browse_folder ) );
+	this->Connect( wxID_COMMAND_MENU_CHECK_FOR_FILE_UPDATE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_check_for_file_update ) );
+	this->Connect( wxID_COMMAND_MENU_DOWNLOAD_AGAIN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_download_again ) );
+	this->Connect( wxID_COMMAND_MENU_START_DOWNLOAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_start_download ) );
+	this->Connect( wxID_COMMAND_MENU_PAUSE_DOWNLOAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_pause_download ) );
+	this->Connect( wxID_COMMAND_MENU_SCHEDULE_DOWNLOAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_schedule_download ) );
+	this->Connect( wxID_COMMAND_MENU_START_DOWNLOAD_ALL, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_start_all_downloads ) );
+	this->Connect( wxID_COMMAND_MENU_PAUSE_DOWNLOAD_ALL, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_pause_all_downloads ) );
+	this->Connect( wxID_COMMAND_MENU_IMPORT_DOWNLOAD_LIST, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_import_download_list ) );
+	this->Connect( wxID_COMMAND_MENU_IMPORT_BROKEN_DOWNLOADS, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_import_broken_downloads ) );
+	this->Connect( wxID_COMMAND_MENU_IMPORT_LINKS_FROM_LOCAL_FILE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_import_links_from_local_file ) );
+	this->Connect( wxID_COMMAND_MENU_EXPORT_DOWNLOAD_LIST, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_export_download_list ) );
+	this->Connect( wxID_COMMAND_MENU_EXPORT_DOWNLOAD_INFORMATION, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_export_download_information ) );
+	this->Connect( wxID_COMMAND_MENU_EXIT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_exit ) );
+	this->Connect( wxID_COMMAND_MENU_SELECT_ALL, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_select_all_downloads ) );
+	this->Connect( wxID_COMMAND_MENU_INVERT_SELECTION, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_invert_selection ) );
+	this->Connect( wxID_COMMAND_MENU_FIND, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_find_download ) );
+	this->Connect( wxID_COMMAND_MENU_FIND_NEXT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_find_next_download ) );
+	this->Connect( wxID_COMMAND_MENU_MOVE_UP, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_move_up ) );
+	this->Connect( wxID_COMMAND_MENU_MOVE_DOWN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_move_down ) );
+	this->Connect( wxID_COMMAND_MENU_DELETE_DOWNLOAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_delete_download ) );
+	this->Connect( wxID_COMMAND_MENU_MOVE_TO, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_move_to ) );
+	this->Connect( wxID_COMMAND_MENU_COPY_URL_TO_CLIPBROAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_copy_url_to_clipbroad ) );
+	this->Connect( wxID_COMMAND_MENU_VIEW_DETAIL, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_show_detail_panel ) );
+	this->Connect( wxID_COMMAND_MENU_VIEW_DROP_ZONE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_drop_zone_window ) );
+	this->Connect( wxID_COMMAND_MENU_VIEW_CATEGORY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_show_class_panel ) );
+	this->Connect( wxID_COMMAND_MENU_EXPORT_DOWNLOAD, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_export_download_file ) );
+	this->Connect( wxID_COMMAND_MENU_RENAME_FILE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_rename_file ) );
+	this->Connect( wxID_COMMAND_MENU_COMMET_AS_FILENAME, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_rename_commet_as_filename ) );
+	this->Connect( wxID_COMMAND_MENU_NEW_CATEGORY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_new_category ) );
+	this->Connect( wxID_COMMAND_MENU_MOVE_CATEGORY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_move_category_to ) );
+	this->Connect( wxID_COMMAND_MENU_DELETE_CATEGORY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_delete_category ) );
+	this->Connect( wxID_COMMAND_MENU_CATEGORY_PROPERTIES, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_show_category_properties_window ) );
+	this->Connect( wxID_COMMAND_MENU_NEW_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_new_database ) );
+	this->Connect( wxID_COMMAND_MENU_OPEN_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_open_database ) );
+	this->Connect( wxID_COMMAND_MENU_MERGE_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_merge_database ) );
+	this->Connect( wxID_COMMAND_MENU_SAVE_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_save_database ) );
+	this->Connect( wxID_COMMAND_MENU_BACKUP_TO_DATABASE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_backup_to_database ) );
+	this->Connect( wxID_COMMAND_MENU_IMPORT_DATABASE_FROM_PREVIOUS_FILE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_imprt_previous_file_to_database ) );
+	this->Connect( wxID_COMMAND_MENU_IMPORT_DATABASE_FROM_PREVIOUS_BATCH_FILE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_imprt_previous_batch_file_to_database ) );
+	this->Connect( wxID_COMMAND_MENU_VIEW_DOWNLOAD_PROPERTIES, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_show_download_properties_window ) );
+	this->Connect( wxID_COMMAND_MENU_VIEW_PROPERTIES_HISTORY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_show_properties_history_window ) );
+	this->Connect( wxID_COMMAND_MENU_CONNECT_OR_DISCONNECT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_connect_or_disconnect ) );
+	this->Connect( wxID_COMMAND_MENU_SAVE_AS_DEFAULT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_save_option_as_defauilt ) );
+	this->Connect( wxID_COMMAND_MENU_SHOW_DEFAULT_DOWNLOAD_PROPERTIES, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_show_download_properties_window ) );
+	this->Connect( wxID_COMMAND_MENU_OPTIONS, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_show_option_window ) );
+	this->Connect( wxID_COMMAND_MENU_HELP, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_goto_online_help ) );
+	this->Connect( wxID_COMMAND_MENU_CHECK_FOR_A_NEW_VERSION, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_check_for_a_new_version ) );
+	this->Connect( wxID_COMMAND_MENU_ABOUT, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_about ) );
+	this->Connect( wxID_COMMAND_TOOL_NEW_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_new_download ) );
+	this->Connect( wxID_COMMAND_TOOL_START_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_start_download ) );
+	this->Connect( wxID_COMMAND_TOOL_PAUSE_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_pause_download ) );
+	this->Connect( wxID_COMMAND_TOOL_DELETE_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_delete_download ) );
+	this->Connect( wxID_COMMAND_TOOL_OPEN_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_launch_dwonload_file ) );
+	this->Connect( wxID_COMMAND_TOOL_BROWSE_FOLDER, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_browse_folder ) );
+	this->Connect( wxID_COMMAND_TOOL_DOWNLOAD_PROPERTIES, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_show_download_properties_window ) );
+	this->Connect( wxID_COMMAND_TOOL_MOVE_UP, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_move_up ) );
+	this->Connect( wxID_COMMAND_TOOL_MOVE_DOWN, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_move_down ) );
+	this->Connect( wxID_COMMAND_TOOL_DOWNLOAD_OPTION, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_show_option_window ) );
+	this->Connect( wxID_COMMAND_TOOL_FIND_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_find_download ) );
+	this->Connect( wxID_COMMAND_TOOL_FIND_NEXT_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_find_next_download ) );
+	//mainSplitter->Connect( wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED, wxSplitterEventHandler( mainFrame::on_main_splitter_sash_position_changed ), NULL, this );
+	m_category_tree->Connect( wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK, wxTreeEventHandler( mainFrame::on_category_right_click ), NULL, this );
+	m_category_tree->Connect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( mainFrame::on_category_select_changed ), NULL, this );
+	m_download_list->Connect( wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler( mainFrame::on_download_list_select_changed ), NULL, this );
+	m_download_thread_view->Connect( wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK, wxTreeEventHandler( mainFrame::on_download_threads_right_click ), NULL, this );
+	m_download_thread_view->Connect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( mainFrame::on_download_list_select_changed ), NULL, this );
 
 
 	initializeCategoryTree();
 	initializeDownloadList();
 }
 
-jxFrame::~jxFrame()
+mainFrame::~mainFrame()
 {
 	// Disconnect Events
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_new_download ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_add_batch_dwonload ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_launch_dwonload_file ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_browse_folder ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_check_for_file_update ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_download_again ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_start_download ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_pause_download ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_schedule_download ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_start_all_downloads ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_pause_all_downloads ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_import_download_list ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_import_broken_downloads ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_import_links_from_local_file ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_export_download_list ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_export_download_information ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_exit ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_select_all_downloads ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_invert_selection ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_find_download ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_find_next_download ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_move_up ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_move_down ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_delete_download ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_move_to ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_copy_url_to_clipbroad ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_show_detail_panel ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_drop_zone_window ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_show_class_panel ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_export_download_file ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_rename_file ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_rename_commet_as_filename ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_new_category ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_move_category_to ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_delete_category ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_show_category_properties_window ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_new_database ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_open_database ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_merge_database ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_save_database ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_backup_to_database ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_imprt_previous_file_to_database ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_imprt_previous_batch_file_to_database ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_show_download_properties_window ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_show_properties_history_window ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_connect_or_disconnect ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_save_option_as_defauilt ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_show_download_properties_window ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_show_option_window ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_goto_online_help ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_check_for_a_new_version ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( jxFrame::on_about ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_new_download ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_start_download ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_pause_download ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_delete_download ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_launch_dwonload_file ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_browse_folder ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_show_download_properties_window ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_move_up ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_move_down ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_show_option_window ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_find_download ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( jxFrame::on_find_next_download ) );
-	//mainSplitter->Disconnect( wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED, wxSplitterEventHandler( jxFrame::on_main_splitter_sash_position_changed ), NULL, this );
-	m_category_tree->Disconnect( wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK, wxTreeEventHandler( jxFrame::on_category_right_click ), NULL, this );
-	m_category_tree->Disconnect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( jxFrame::on_category_select_changed ), NULL, this );
-	m_download_list->Disconnect( wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler( jxFrame::on_download_list_select_changed ), NULL, this );
-	m_download_thread_view->Disconnect( wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK, wxTreeEventHandler( jxFrame::on_download_threads_right_click ), NULL, this );
-	m_download_thread_view->Disconnect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( jxFrame::on_download_list_select_changed ), NULL, this );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_new_download ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_add_batch_dwonload ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_launch_dwonload_file ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_browse_folder ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_check_for_file_update ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_download_again ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_start_download ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_pause_download ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_schedule_download ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_start_all_downloads ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_pause_all_downloads ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_import_download_list ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_import_broken_downloads ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_import_links_from_local_file ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_export_download_list ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_export_download_information ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_exit ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_select_all_downloads ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_invert_selection ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_find_download ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_find_next_download ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_move_up ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_move_down ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_delete_download ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_move_to ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_copy_url_to_clipbroad ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_show_detail_panel ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_drop_zone_window ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_show_class_panel ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_export_download_file ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_rename_file ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_rename_commet_as_filename ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_new_category ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_move_category_to ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_delete_category ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_show_category_properties_window ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_new_database ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_open_database ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_merge_database ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_save_database ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_backup_to_database ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_imprt_previous_file_to_database ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_imprt_previous_batch_file_to_database ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_show_download_properties_window ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_show_properties_history_window ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_connect_or_disconnect ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_save_option_as_defauilt ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_show_download_properties_window ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_show_option_window ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_goto_online_help ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_check_for_a_new_version ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainFrame::on_about ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_new_download ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_start_download ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_pause_download ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_delete_download ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_launch_dwonload_file ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_browse_folder ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_show_download_properties_window ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_move_up ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_move_down ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_show_option_window ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_find_download ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_find_next_download ) );
+	//mainSplitter->Disconnect( wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED, wxSplitterEventHandler( mainFrame::on_main_splitter_sash_position_changed ), NULL, this );
+	m_category_tree->Disconnect( wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK, wxTreeEventHandler( mainFrame::on_category_right_click ), NULL, this );
+	m_category_tree->Disconnect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( mainFrame::on_category_select_changed ), NULL, this );
+	m_download_list->Disconnect( wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler( mainFrame::on_download_list_select_changed ), NULL, this );
+	m_download_thread_view->Disconnect( wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK, wxTreeEventHandler( mainFrame::on_download_threads_right_click ), NULL, this );
+	m_download_thread_view->Disconnect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( mainFrame::on_download_list_select_changed ), NULL, this );
 }
 
 
-wxToolBar* jxFrame::createToolBar()
+wxToolBar* mainFrame::createToolBar()
 {
 	wxToolBar* toolBar = this->CreateToolBar( wxTB_DOCKABLE|wxTB_FLAT|wxTB_HORIZONTAL, wxID_ANY );
 	toolBar->SetToolBitmapSize( wxSize( 24,24 ) );
@@ -204,7 +204,7 @@ wxToolBar* jxFrame::createToolBar()
 }
 
 
-wxMenuBar* jxFrame::createMenuBar()
+wxMenuBar* mainFrame::createMenuBar()
 {
 	wxMenuBar* menuBar  = new wxMenuBar( 0 );
 	wxMenu* fileMenu = new wxMenu();
@@ -331,7 +331,7 @@ wxMenuBar* jxFrame::createMenuBar()
 	return menuBar;
 }
 
-wxPanel* jxFrame::createTreePanel( wxWindow* mainSplitter )
+wxPanel* mainFrame::createTreePanel( wxWindow* mainSplitter )
 {
 	wxPanel* treePanel = new wxPanel( mainSplitter);	
 	m_category_tree = new wxTreeCtrl( treePanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
@@ -344,11 +344,11 @@ wxPanel* jxFrame::createTreePanel( wxWindow* mainSplitter )
 	return treePanel;
 }
 
-wxPanel* jxFrame::createDownloadPanel( wxWindow* mainSplitter )
+wxPanel* mainFrame::createDownloadPanel( wxWindow* mainSplitter )
 {
 	wxPanel* downloadPanel = new wxPanel( mainSplitter );
 	wxSplitterWindow* downloadSplitter = new wxSplitterWindow( downloadPanel, wxID_WINDOW_DOWNLOADSPLITTER );
-	downloadSplitter->Connect( wxEVT_IDLE, wxIdleEventHandler( jxFrame::on_splitterOnIdle ), NULL, this );
+	downloadSplitter->Connect( wxEVT_IDLE, wxIdleEventHandler( mainFrame::on_splitterOnIdle ), NULL, this );
 
 	wxPanel* downloadListPanel = new wxPanel( downloadSplitter);
 	m_download_list = new wxListCtrl( downloadListPanel, wxID_ANY, wxDefaultPosition, wxSize( -1, 200 ), wxLC_REPORT|wxLC_SINGLE_SEL );
@@ -396,7 +396,7 @@ wxPanel* jxFrame::createDownloadPanel( wxWindow* mainSplitter )
 }
 
 
-wxPanel* jxFrame::createGraphPanel( wxAuiNotebook* downloadBook )
+wxPanel* mainFrame::createGraphPanel( wxAuiNotebook* downloadBook )
 {
 	wxPanel* graphPanel = new wxPanel( downloadBook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* graphSizer = new wxBoxSizer( wxVERTICAL );
@@ -406,13 +406,13 @@ wxPanel* jxFrame::createGraphPanel( wxAuiNotebook* downloadBook )
 	return graphPanel;
 }
 
-wxPanel* jxFrame::createLogPanel( wxAuiNotebook* downloadBook )
+wxPanel* mainFrame::createLogPanel( wxAuiNotebook* downloadBook )
 {
 	wxPanel* logPanel = new wxPanel( downloadBook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* logSizer = new wxBoxSizer( wxVERTICAL );
 	
 	wxSplitterWindow* logSplitter = new wxSplitterWindow( logPanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D );
-	logSplitter->Connect( wxEVT_IDLE, wxIdleEventHandler( jxFrame::on_splitterOnIdle ), NULL, this );
+	logSplitter->Connect( wxEVT_IDLE, wxIdleEventHandler( mainFrame::on_splitterOnIdle ), NULL, this );
 	wxPanel* threadPanel = new wxPanel( logSplitter, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxBoxSizer* threadSizer = new wxBoxSizer( wxVERTICAL );
 	m_download_thread_view = new wxTreeCtrl( threadPanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0|wxNO_BORDER );
@@ -443,7 +443,7 @@ wxPanel* jxFrame::createLogPanel( wxAuiNotebook* downloadBook )
 	return logPanel;
 }
 
-void jxFrame::on_splitterOnIdle( wxIdleEvent& e)
+void mainFrame::on_splitterOnIdle( wxIdleEvent& e)
 {
 	 wxSplitterWindow *splitter = wxDynamicCast(e.GetEventObject(), wxSplitterWindow);
 	if( NULL !=  splitter)
@@ -453,7 +453,7 @@ void jxFrame::on_splitterOnIdle( wxIdleEvent& e)
 		else
           splitter->SetSashPosition( 200 );
 
-        splitter->Disconnect( wxEVT_IDLE, wxIdleEventHandler( jxFrame::on_splitterOnIdle ), NULL, this );
+        splitter->Disconnect( wxEVT_IDLE, wxIdleEventHandler( mainFrame::on_splitterOnIdle ), NULL, this );
 	}
 }
 

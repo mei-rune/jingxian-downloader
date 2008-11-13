@@ -12,6 +12,7 @@
 #include "wx/filename.h"
 #include "jxApp.h"
 #include "mainFrame.h"
+#include "VirtualFileSystem.h"
 #include "icons/jingxian.xpm"
 
 IMPLEMENT_APP(jxApp);
@@ -19,22 +20,16 @@ IMPLEMENT_APP(jxApp);
 bool jxApp::OnInit()
 {
 #if defined(__WXMSW__)
-	wxFileName name( wxStandardPaths::GetExecutablePath());
+	wxFileName name( wxStandardPathsBase::Get().GetExecutablePath());
     wxString binDirectory =  name.GetPath();
 #else
     wxString binDirectory = wxStandardPaths::GetConfigDir() );
 #endif
 
-	m_virtualFS.ChangePathTo(  wxStandardPaths::GetConfigDir() );
+	VirtualFileSystem::Get().SetBaseDirectory( binDirectory );
     m_frame = new mainFrame(0L);
     m_frame->SetIcon(wxIcon(jingxian)); // To Set App Icon
     m_frame->Show();
     
     return true;
-}
-
-
-wxFileSystem& jxApp::GetFileSystem()
-{
-	return m_virtualFS;
 }
