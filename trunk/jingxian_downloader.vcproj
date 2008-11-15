@@ -197,14 +197,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\mainFrame.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\mainFrame.functional.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\NewDownload.cpp"
 				>
 			</File>
@@ -227,11 +219,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\jxApp.h"
+				RelativePath=".\jx.h"
 				>
 			</File>
 			<File
-				RelativePath=".\mainFrame.h"
+				RelativePath=".\jxApp.h"
 				>
 			</File>
 			<File
@@ -254,6 +246,54 @@
 			>
 			<File
 				RelativePath=".\resource.rc"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="MainFrame"
+			>
+			<File
+				RelativePath=".\DownloadGroupWnd.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DownloadGroupWnd.h"
+				>
+			</File>
+			<File
+				RelativePath=".\DownloadList.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DownloadList.h"
+				>
+			</File>
+			<File
+				RelativePath=".\DownloadWnd.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DownloadWnd.h"
+				>
+			</File>
+			<File
+				RelativePath=".\InformationWnd.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\InformationWnd.h"
+				>
+			</File>
+			<File
+				RelativePath=".\mainFrame.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\mainFrame.functional.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\mainFrame.h"
 				>
 			</File>
 		</Filter>
