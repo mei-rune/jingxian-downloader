@@ -326,27 +326,3 @@ void mainFrame::on_main_splitter_sash_position_changed( wxSplitterEvent& e )
 	e.Skip(); 
 }
 
-void mainFrame::on_category_right_click( wxTreeEvent& e )
-{
-	e.Skip(); 
-}
-
-void mainFrame::on_category_select_changed( wxTreeEvent& e )
-{
-	e.Skip(); 
-}
-
-void mainFrame::on_download_list_select_changed( wxListEvent& e )
-{
-	e.Skip(); 
-}
-
-void mainFrame::on_download_threads_right_click( wxTreeEvent& e )
-{
-	e.Skip(); 
-}
-
-void mainFrame::on_download_list_select_changed( wxTreeEvent& e )
-{
-	e.Skip(); 
-}

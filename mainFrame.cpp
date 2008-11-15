@@ -18,10 +18,16 @@ mainFrame::mainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	this->SetMenuBar( createMenuBar() );
 	createToolBar();
 
+
+
 	wxSplitterWindow* mainSplitter = new wxSplitterWindow( this, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), 0 );
 	//mainSplitter->Connect( wxEVT_IDLE, wxIdleEventHandler( mainFrame::on_splitterOnIdle ), NULL, this );
 
-	mainSplitter->SplitVertically( createTreePanel( mainSplitter ), createDownloadPanel( mainSplitter ), 150 );
+	
+	m_download_group_wnd = new DownloadGroupWnd( mainSplitter );
+	m_download_task_wnd = new DownloadWnd( mainSplitter );
+
+	mainSplitter->SplitVertically(m_download_group_wnd, m_download_task_wnd, 150 );
 
 	wxBoxSizer* mainSizer = new wxBoxSizer( wxVERTICAL );
 	mainSizer->Add( mainSplitter, 2, wxEXPAND, 0 );
@@ -94,16 +100,7 @@ mainFrame::mainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	this->Connect( wxID_COMMAND_TOOL_DOWNLOAD_OPTION, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_show_option_window ) );
 	this->Connect( wxID_COMMAND_TOOL_FIND_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_find_download ) );
 	this->Connect( wxID_COMMAND_TOOL_FIND_NEXT_DOWNLOAD, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_find_next_download ) );
-	//mainSplitter->Connect( wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED, wxSplitterEventHandler( mainFrame::on_main_splitter_sash_position_changed ), NULL, this );
-	m_category_tree->Connect( wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK, wxTreeEventHandler( mainFrame::on_category_right_click ), NULL, this );
-	m_category_tree->Connect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( mainFrame::on_category_select_changed ), NULL, this );
-	m_download_list->Connect( wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler( mainFrame::on_download_list_select_changed ), NULL, this );
-	m_download_thread_view->Connect( wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK, wxTreeEventHandler( mainFrame::on_download_threads_right_click ), NULL, this );
-	m_download_thread_view->Connect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( mainFrame::on_download_list_select_changed ), NULL, this );
-
-
-	initializeCategoryTree();
-	initializeDownloadList();
+	//mainSplitter->Connect( wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED, wxSplitterEventHandler( mainFrame::on_main_splitter_sash_position_changed ), NULL, this );	
 }
 
 mainFrame::~mainFrame()
@@ -174,11 +171,6 @@ mainFrame::~mainFrame()
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_find_download ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_TOOL_CLICKED, wxCommandEventHandler( mainFrame::on_find_next_download ) );
 	//mainSplitter->Disconnect( wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED, wxSplitterEventHandler( mainFrame::on_main_splitter_sash_position_changed ), NULL, this );
-	m_category_tree->Disconnect( wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK, wxTreeEventHandler( mainFrame::on_category_right_click ), NULL, this );
-	m_category_tree->Disconnect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( mainFrame::on_category_select_changed ), NULL, this );
-	m_download_list->Disconnect( wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler( mainFrame::on_download_list_select_changed ), NULL, this );
-	m_download_thread_view->Disconnect( wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK, wxTreeEventHandler( mainFrame::on_download_threads_right_click ), NULL, this );
-	m_download_thread_view->Disconnect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( mainFrame::on_download_list_select_changed ), NULL, this );
 }
 
 
@@ -331,131 +323,7 @@ wxMenuBar* mainFrame::createMenuBar()
 	return menuBar;
 }
 
-wxPanel* mainFrame::createTreePanel( wxWindow* mainSplitter )
-{
-	wxPanel* treePanel = new wxPanel( mainSplitter);	
-	m_category_tree = new wxTreeCtrl( treePanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
-	m_category_tree->SetMinSize( wxSize( 150,-1 ) );
-	wxBoxSizer* treeSizer = new wxBoxSizer( wxVERTICAL );
-	treeSizer->Add( m_category_tree, 1, wxALL|wxEXPAND, 0 );
-	treePanel->SetSizer( treeSizer );
-	treePanel->Layout();
-	treeSizer->Fit( treePanel );
-	return treePanel;
-}
 
-wxPanel* mainFrame::createDownloadPanel( wxWindow* mainSplitter )
-{
-	wxPanel* downloadPanel = new wxPanel( mainSplitter );
-	wxSplitterWindow* downloadSplitter = new wxSplitterWindow( downloadPanel, wxID_WINDOW_DOWNLOADSPLITTER );
-	downloadSplitter->Connect( wxEVT_IDLE, wxIdleEventHandler( mainFrame::on_splitterOnIdle ), NULL, this );
-
-	wxPanel* downloadListPanel = new wxPanel( downloadSplitter);
-	m_download_list = new wxListCtrl( downloadListPanel, wxID_ANY, wxDefaultPosition, wxSize( -1, 200 ), wxLC_REPORT|wxLC_SINGLE_SEL );
-
-	m_download_list->InsertColumn(0, wxT("") , wxLIST_FORMAT_CENTRE, 30 );
- 	m_download_list->InsertColumn(1, wxT("Name"), wxLIST_FORMAT_LEFT, 150 );
-    m_download_list->InsertColumn(2, wxT("Size") );
-    m_download_list->InsertColumn(3, wxT("Completed") );
-    m_download_list->InsertColumn(4, wxT("Percent") );
-    m_download_list->InsertColumn(5, wxT("Elapse") );
-    m_download_list->InsertColumn(6, wxT("Left") );
-    m_download_list->InsertColumn(7, wxT("Speed") );
-    m_download_list->InsertColumn(8, wxT("Num") );
-    m_download_list->InsertColumn(9, wxT("URL") , wxLIST_FORMAT_LEFT, 300 );
-    m_download_list->InsertColumn(10, wxT("Comment") , wxLIST_FORMAT_LEFT, 200 );
-
-
-	wxBoxSizer* downloadListSizer = new wxBoxSizer( wxVERTICAL );
-	downloadListSizer->Add( m_download_list, 1, wxALL|wxEXPAND, 0 );
-	downloadListPanel->SetSizer( downloadListSizer );
-	downloadListPanel->Layout();
-	downloadListSizer->Fit( downloadListPanel );
-
-	wxPanel* informationPanel = new wxPanel( downloadSplitter);
-	
-	wxAuiNotebook* downloadBook = new wxAuiNotebook( informationPanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0|wxNO_BORDER );
-	downloadBook->AddPage( createGraphPanel( downloadBook ), wxT("Graph"), false, wxNullBitmap );
-	downloadBook->AddPage( createLogPanel( downloadBook ), wxT("Log"), true, wxNullBitmap );
-	
-	wxBoxSizer* informationSizer = new wxBoxSizer( wxVERTICAL );
-    informationSizer->Add( downloadBook, 1, wxALL|wxEXPAND, 0 );
-	informationPanel->SetSizer( informationSizer );
-	informationPanel->Layout();
-	informationSizer->Fit( informationPanel );
-	
-	downloadSplitter->SplitHorizontally( downloadListPanel, informationPanel, 200 );
-
-	wxBoxSizer* downloadSizer = new wxBoxSizer( wxVERTICAL );
-	downloadSizer->Add( downloadSplitter, 2, wxEXPAND, 0 );
-	downloadPanel->SetSizer( downloadSizer );
-	downloadPanel->Layout();
-	downloadSizer->Fit( downloadPanel );
-
-	return downloadPanel;
-}
-
-
-wxPanel* mainFrame::createGraphPanel( wxAuiNotebook* downloadBook )
-{
-	wxPanel* graphPanel = new wxPanel( downloadBook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	wxBoxSizer* graphSizer = new wxBoxSizer( wxVERTICAL );
-	graphPanel->SetSizer( graphSizer );
-	graphPanel->Layout();
-	graphSizer->Fit( graphPanel );
-	return graphPanel;
-}
-
-wxPanel* mainFrame::createLogPanel( wxAuiNotebook* downloadBook )
-{
-	wxPanel* logPanel = new wxPanel( downloadBook, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	wxBoxSizer* logSizer = new wxBoxSizer( wxVERTICAL );
-	
-	wxSplitterWindow* logSplitter = new wxSplitterWindow( logPanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D );
-	logSplitter->Connect( wxEVT_IDLE, wxIdleEventHandler( mainFrame::on_splitterOnIdle ), NULL, this );
-	wxPanel* threadPanel = new wxPanel( logSplitter, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	wxBoxSizer* threadSizer = new wxBoxSizer( wxVERTICAL );
-	m_download_thread_view = new wxTreeCtrl( threadPanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0|wxNO_BORDER );
-	m_download_thread_view->SetMinSize( wxSize( 60,-1 ) );
-	threadSizer->Add( m_download_thread_view, 1, wxALL|wxEXPAND, 0 );
-	threadPanel->SetSizer( threadSizer );
-	threadPanel->Layout();
-	threadSizer->Fit( threadPanel );
-
-	wxPanel* txtPanel = new wxPanel( logSplitter, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	wxBoxSizer* txtSizer = new wxBoxSizer( wxVERTICAL );
-	
-	m_download_txt_view = new wxListCtrl( txtPanel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxLC_SINGLE_SEL );
-	m_download_txt_view->InsertColumn(0, wxT("Date") );
-	m_download_txt_view->InsertColumn(1, wxT("Information"), wxLIST_FORMAT_LEFT, 300 );
-
-	txtSizer->Add( m_download_txt_view, 1, wxALL|wxEXPAND, 0 );
-	txtPanel->SetSizer( txtSizer );
-	txtPanel->Layout();
-	txtSizer->Fit( txtPanel );
-
-	logSplitter->SplitVertically( threadPanel, txtPanel, 100 );
-	
-	logSizer->Add( logSplitter, 1, wxEXPAND, 5 );
-	logPanel->SetSizer( logSizer );
-	logPanel->Layout();
-	logSizer->Fit( logPanel );
-	return logPanel;
-}
-
-void mainFrame::on_splitterOnIdle( wxIdleEvent& e)
-{
-	 wxSplitterWindow *splitter = wxDynamicCast(e.GetEventObject(), wxSplitterWindow);
-	if( NULL !=  splitter)
-	{
-		if( ( wxID_WINDOW_DOWNLOADSPLITTER ) == splitter->GetId() )
-			splitter->SetSashPosition( ( int) (splitter->GetSize().GetHeight() * 0.8) );
-		else
-          splitter->SetSashPosition( 200 );
-
-        splitter->Disconnect( wxEVT_IDLE, wxIdleEventHandler( mainFrame::on_splitterOnIdle ), NULL, this );
-	}
-}
 
 
 optionDialog::optionDialog( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
