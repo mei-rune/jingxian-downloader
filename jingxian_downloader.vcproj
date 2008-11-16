@@ -40,9 +40,9 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DwxUSE_NO_MANIFEST"
+				AdditionalOptions="/DwxUSE_NO_MANIFEST&#x0D;&#x0A;"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(WX_ROOT)\include\msvc&quot;;&quot;$(WX_ROOT)\include&quot;"
+				AdditionalIncludeDirectories="wxCURL\include;&quot;$(CURL_ROOT)\include&quot;;&quot;$(WX_ROOT)\include\msvc&quot;;&quot;$(WX_ROOT)\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;__WXMSW__;__WXDEBUG__"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -65,13 +65,14 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Ws2_32.lib Rpcrt4.lib Winmm.lib comctl32.lib"
+				AdditionalDependencies="libcurld.lib Ws2_32.lib Rpcrt4.lib Winmm.lib comctl32.lib Wldap32.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(WX_ROOT)\include&quot;;&quot;$(WX_ROOT)\include\msvc&quot;;&quot;$(WX_ROOT)\lib\vc_lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(CURL_ROOT)\vc_lib&quot;;&quot;$(WX_ROOT)\include&quot;;&quot;$(WX_ROOT)\include\msvc&quot;;&quot;$(WX_ROOT)\lib\vc_lib&quot;"
 				GenerateManifest="true"
 				ManifestFile="$(IntDir)\$(TargetFileName).intermediate.manifest"
 				GenerateDebugInformation="true"
 				SubSystem="2"
+				DataExecutionPrevention="0"
 				TargetMachine="1"
 				AllowIsolation="true"
 			/>
@@ -128,7 +129,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(WX_ROOT)\include\msvc&quot;;&quot;$(WX_ROOT)\include&quot;"
+				AdditionalIncludeDirectories="wxCURL\include;&quot;$(CURL_ROOT)\include&quot;;&quot;$(WX_ROOT)\include\msvc&quot;;&quot;$(WX_ROOT)\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -148,9 +149,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Ws2_32.lib Rpcrt4.lib Winmm.lib comctl32.lib"
+				AdditionalDependencies="libcurl.lib Ws2_32.lib Rpcrt4.lib Winmm.lib comctl32.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(WX_ROOT)\include&quot;;&quot;$(WX_ROOT)\include\msvc&quot;;&quot;$(WX_ROOT)\lib\vc_lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(CURL_ROOT)\vc_lib_release&quot;;&quot;$(WX_ROOT)\include&quot;;&quot;$(WX_ROOT)\include\msvc&quot;;&quot;$(WX_ROOT)\lib\vc_lib&quot;"
 				ManifestFile="$(IntDir)\$(TargetFileName).manifest"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -300,6 +301,86 @@
 				RelativePath=".\NewDownload.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="wxCURL"
+			>
+			<Filter
+				Name="include"
+				>
+				<Filter
+					Name="wxCURL"
+					>
+					<File
+						RelativePath=".\wxCURL\include\wxCURL\base.h"
+						>
+					</File>
+					<File
+						RelativePath=".\wxCURL\include\wxCURL\dav.h"
+						>
+					</File>
+					<File
+						RelativePath=".\wxCURL\include\wxCURL\davtool.h"
+						>
+					</File>
+					<File
+						RelativePath=".\wxCURL\include\wxCURL\ftp.h"
+						>
+					</File>
+					<File
+						RelativePath=".\wxCURL\include\wxCURL\ftptool.h"
+						>
+					</File>
+					<File
+						RelativePath=".\wxCURL\include\wxCURL\http.h"
+						>
+					</File>
+					<File
+						RelativePath=".\wxCURL\include\wxCURL\telnet.h"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="src"
+				>
+				<File
+					RelativePath=".\wxCURL\src\base.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\wxCURL\src\dav.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\wxCURL\src\davtool.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\wxCURL\src\ftp.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\wxCURL\src\ftpparse.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\wxCURL\src\ftpparse.h"
+					>
+				</File>
+				<File
+					RelativePath=".\wxCURL\src\ftptool.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\wxCURL\src\http.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\wxCURL\src\telnet.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath=".\DownloadGroup.cpp"
