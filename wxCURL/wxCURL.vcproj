@@ -17,8 +17,8 @@
 	<Configurations>
 		<Configuration
 			Name="Unicode Release|Win32"
-			OutputDirectory=".\..\..\lib\vc_lib"
-			IntermediateDirectory=".\vc_mswu\curl"
+			OutputDirectory="$(ProjectDir)..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\$(ConfigurationName)\wxCURL"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -94,8 +94,8 @@
 		</Configuration>
 		<Configuration
 			Name="DLL Debug|Win32"
-			OutputDirectory=".\..\..\lib\vc_dll"
-			IntermediateDirectory=".\vc_mswddll\curl"
+			OutputDirectory="$(ProjectDir)..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\$(ConfigurationName)\wxCURL"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -193,8 +193,8 @@
 		</Configuration>
 		<Configuration
 			Name="DLL Unicode Release|Win32"
-			OutputDirectory=".\..\..\lib\vc_dll"
-			IntermediateDirectory=".\vc_mswudll\curl"
+			OutputDirectory="$(ProjectDir)..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\$(ConfigurationName)\wxCURL"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -293,8 +293,8 @@
 		</Configuration>
 		<Configuration
 			Name="Unicode Debug|Win32"
-			OutputDirectory=".\..\..\lib\vc_lib"
-			IntermediateDirectory=".\vc_mswud\curl"
+			OutputDirectory="$(ProjectDir)..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\$(ConfigurationName)\wxCURL"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -370,8 +370,8 @@
 		</Configuration>
 		<Configuration
 			Name="DLL Release|Win32"
-			OutputDirectory=".\..\..\lib\vc_dll"
-			IntermediateDirectory=".\vc_mswdll\curl"
+			OutputDirectory="$(ProjectDir)..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\$(ConfigurationName)\wxCURL"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -468,8 +468,8 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory=".\..\..\lib\vc_lib"
-			IntermediateDirectory=".\..\..\lib\vc_lib\wxCURL"
+			OutputDirectory="$(ProjectDir)..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\$(ConfigurationName)\wxCURL"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -504,9 +504,9 @@
 				UsePrecompiledHeader="0"
 				PrecompiledHeaderThrough="wxcurl_config.h"
 				PrecompiledHeaderFile="$(IntDir)\$(TargetName).pch"
-				AssemblerListingLocation="$(IntDir)\"
+				AssemblerListingLocation=""
 				ObjectFile="$(IntDir)\"
-				ProgramDataBaseFileName="$(OutDir)\wxcurld.pdb"
+				ProgramDataBaseFileName="$(IntDir)\$(ProjectName).pdb"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
@@ -524,7 +524,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\lib\vc_lib\wxcurld.lib"
+				OutputFile="$(OutDir)\$(ProjectName).lib"
 				SuppressStartupBanner="true"
 			/>
 			<Tool
@@ -547,8 +547,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory=".\..\..\lib\vc_lib"
-			IntermediateDirectory=".\vc_msw\curl"
+			OutputDirectory="$(ProjectDir)..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\$(ConfigurationName)\wxCURL"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -624,8 +624,8 @@
 		</Configuration>
 		<Configuration
 			Name="DLL Unicode Debug|Win32"
-			OutputDirectory=".\..\..\lib\vc_dll"
-			IntermediateDirectory=".\vc_mswuddll\curl"
+			OutputDirectory="$(ProjectDir)..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\$(ConfigurationName)\wxCURL"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
