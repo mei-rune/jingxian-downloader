@@ -10,30 +10,42 @@
 #ifndef DOWNLOAD_GROUP_H
 #define DOWNLOAD_GROUP_H
 
-#include <list>
+#include <wx/string.h>
+#include <wx/list.h>
 
-class download_group
+class DownloadGroup;
+
+WX_DECLARE_LIST(DownloadGroup, DownloadGroupList);
+
+class DownloadGroup : wxObject
 {
 public:
-	download_group();
-	~download_group(void);
+	DownloadGroup();
+	DownloadGroup(const wxChar* nm, const wxChar* folder);
+	DownloadGroup(const wxChar* nm, const wxChar* folder, const wxStringList& exts);
+	~DownloadGroup(void);
 
-	//const jxString& Name() const;
-	//void Name(const jxString& nm);
+	const wxString& Name() const;
+	void Name(const wxString& nm);
 
-	//const jxString& Folder() const;
-	//void Folder(const jxString& folder);
+	const wxString& Folder() const;
+	void Folder(const wxString& folder);
 
-	//std::list<jxString>& Exts() const;
-	//const std::list<jxString>& Exts() const;
+	wxStringList& Exts();
+	const wxStringList& Exts() const;
 
+
+	DownloadGroupList& Childs();
+	const DownloadGroupList& Childs() const;
+
+    DECLARE_DYNAMIC_CLASS(DownloadGroup);
 private:
 	
-	//jxString m_name;		
-	//jxString m_folder;	
-	//jxString exts;		
+	wxString m_name;
+	wxString m_folder;
+	wxStringList m_exts;
 
-	std::list<download_group> m_childs;
+	DownloadGroupList m_childs;
 };
 
 #endif // DOWNLOAD_GROUP_H

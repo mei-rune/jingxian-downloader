@@ -23,6 +23,10 @@
 #define _CRT_SECURE_NO_DEPRECATE // Add this if you want to suppress "This function or variable may be unsafe. Consider using <alternative> instead." warnings.
 #define _CRT_NONSTDC_NO_DEPRECATE // Suppresses other warnings.
 
+#ifndef CURL_STATICLIB
+#define CURL_STATICLIB
+#endif
+
 #include <winsock2.h>
 
 // basic wxWidgets headers
