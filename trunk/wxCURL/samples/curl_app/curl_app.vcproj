@@ -17,8 +17,8 @@
 	<Configurations>
 		<Configuration
 			Name="DLL Unicode Release|Win32"
-			OutputDirectory=".\vc_mswudll"
-			IntermediateDirectory=".\vc_mswudll\curl_app"
+			OutputDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)\curl_app"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -114,8 +114,8 @@
 		</Configuration>
 		<Configuration
 			Name="DLL Release|Win32"
-			OutputDirectory=".\vc_mswdll"
-			IntermediateDirectory=".\vc_mswdll\curl_app"
+			OutputDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)\curl_app"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -210,8 +210,8 @@
 		</Configuration>
 		<Configuration
 			Name="Unicode Debug|Win32"
-			OutputDirectory=".\vc_mswud"
-			IntermediateDirectory=".\vc_mswud\curl_app"
+			OutputDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)\curl_app"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -308,8 +308,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory=".\vc_msw"
-			IntermediateDirectory=".\vc_msw\curl_app"
+			OutputDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)\curl_app"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -405,8 +405,8 @@
 		</Configuration>
 		<Configuration
 			Name="Unicode Release|Win32"
-			OutputDirectory=".\vc_mswu"
-			IntermediateDirectory=".\vc_mswu\curl_app"
+			OutputDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)\curl_app"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -502,8 +502,8 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ProjectDir)..\..\..\..\lib\vc_lib"
-			IntermediateDirectory="$(ProjectDir)..\..\..\..\lib\vc_lib\curl_app"
+			OutputDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)\curl_app"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -543,7 +543,7 @@
 				PrecompiledHeaderFile="$(IntDir)\$(TargetName).pch"
 				AssemblerListingLocation=""
 				ObjectFile="$(IntDir)\"
-				ProgramDataBaseFileName="$(IntDir)\vc90.pdb"
+				ProgramDataBaseFileName="$(IntDir)\$(ProjectName).pdb"
 				WarningLevel="4"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
@@ -554,7 +554,7 @@
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_DEBUG,__WXMSW__,__WXDEBUG__,_WINDOWS"
-				Culture="1029"
+				Culture="0"
 				AdditionalIncludeDirectories="&quot;$(WX_ROOT)\include\msvc&quot;;&quot;$(WX_ROOT)\include&quot;"
 			/>
 			<Tool
@@ -562,11 +562,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcurld.lib wxcurld.lib wxmsw28d_xrc.lib wxmsw28d_core.lib wxmsw28d_adv.lib wxmsw28d_html.lib wxbase28d.lib wxbase28d_xml.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib wxregexd.lib wxexpatd.lib winmm.lib comctl32.lib rpcrt4.lib wsock32.lib oleacc.lib odbc32.lib Wldap32.lib Ws2_32.lib"
+				AdditionalDependencies="libcurld.lib wxcurl.lib wxmsw28d_xrc.lib wxmsw28d_core.lib wxmsw28d_adv.lib wxmsw28d_html.lib wxbase28d.lib wxbase28d_xml.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib wxregexd.lib wxexpatd.lib winmm.lib comctl32.lib rpcrt4.lib wsock32.lib oleacc.lib odbc32.lib Wldap32.lib Ws2_32.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="&quot;$(ProjectDir)..\..\..\..\lib\vc_lib&quot;;&quot;$(CURL_ROOT)\vc_lib&quot;;&quot;$(WX_ROOT)\include&quot;;&quot;$(WX_ROOT)\include\msvc&quot;;&quot;$(WX_ROOT)\lib\vc_lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(CURL_ROOT)\vc_lib&quot;;&quot;$(WX_ROOT)\include&quot;;&quot;$(WX_ROOT)\include\msvc&quot;;&quot;$(WX_ROOT)\lib\vc_lib&quot;;&quot;$(OutDir)&quot;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(TargetDir)$(TargetName).pdb"
 				SubSystem="2"
@@ -596,12 +596,13 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
 			Name="DLL Unicode Debug|Win32"
-			OutputDirectory=".\vc_mswuddll"
-			IntermediateDirectory=".\vc_mswuddll\curl_app"
+			OutputDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)\curl_app"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -698,8 +699,8 @@
 		</Configuration>
 		<Configuration
 			Name="DLL Debug|Win32"
-			OutputDirectory=".\vc_mswddll"
-			IntermediateDirectory=".\vc_mswddll\curl_app"
+			OutputDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)"
+			IntermediateDirectory="$(ProjectDir)..\..\..\..\$(ConfigurationName)\curl_app"
 			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
 			UseOfMFC="0"
@@ -851,6 +852,7 @@
 				<Tool
 					Name="VCResourceCompilerTool"
 					PreprocessorDefinitions=""
+					Culture="2052"
 					AdditionalIncludeDirectories=""
 				/>
 			</FileConfiguration>
