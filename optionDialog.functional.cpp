@@ -8,7 +8,7 @@
  **************************************************************/
 
 #include "pre_config.h"
-#include "mainFrame.h"
+#include "DownloadFrame.h"
 
 
 

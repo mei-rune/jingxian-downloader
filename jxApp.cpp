@@ -11,7 +11,7 @@
 #include "wx/stdpaths.h"
 #include "wx/filename.h"
 #include "jxApp.h"
-#include "mainFrame.h"
+#include "DownloadFrame.h"
 #include "VirtualFileSystem.h"
 #include "icons/jingxian.xpm"
 
@@ -27,7 +27,7 @@ bool jxApp::OnInit()
 #endif
 
 	VirtualFileSystem::Get().SetBaseDirectory( binDirectory );
-    m_frame = new mainFrame(0L);
+    m_frame = new DownloadFrame(0L);
     m_frame->SetIcon(wxIcon(jingxian)); // To Set App Icon
     m_frame->Show();
     

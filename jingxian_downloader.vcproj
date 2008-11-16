@@ -197,10 +197,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\NewDownload.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\optionDialog.functional.cpp"
 				>
 			</File>
@@ -227,10 +223,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\NewDownload.h"
-				>
-			</File>
-			<File
 				RelativePath=".\pre_config.h"
 				>
 			</File>
@@ -250,8 +242,20 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="MainFrame"
+			Name="DownloadFrame"
 			>
+			<File
+				RelativePath=".\DownloadFrame.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DownloadFrame.functional.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DownloadFrame.h"
+				>
+			</File>
 			<File
 				RelativePath=".\DownloadGroupWnd.cpp"
 				>
@@ -261,19 +265,19 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DownloadList.cpp"
+				RelativePath=".\DownloadTaskList.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\DownloadList.h"
+				RelativePath=".\DownloadTaskList.h"
 				>
 			</File>
 			<File
-				RelativePath=".\DownloadWnd.cpp"
+				RelativePath=".\DownloadTaskWnd.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\DownloadWnd.h"
+				RelativePath=".\DownloadTaskWnd.h"
 				>
 			</File>
 			<File
@@ -284,19 +288,27 @@
 				RelativePath=".\InformationWnd.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="Dialog"
+			>
 			<File
-				RelativePath=".\mainFrame.cpp"
+				RelativePath=".\NewDownload.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\mainFrame.functional.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\mainFrame.h"
+				RelativePath=".\NewDownload.h"
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\DownloadGroup.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\DownloadGroup.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
