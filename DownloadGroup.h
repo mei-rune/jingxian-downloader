@@ -12,12 +12,9 @@
 
 #include <wx/string.h>
 #include <wx/list.h>
+#include <wx/treectrl.h>
 
-class DownloadGroup;
-
-WX_DECLARE_LIST(DownloadGroup, DownloadGroupList);
-
-class DownloadGroup : wxObject
+class DownloadGroup : public wxTreeItemData
 {
 public:
 	DownloadGroup();
@@ -35,17 +32,14 @@ public:
 	const wxStringList& Exts() const;
 
 
-	DownloadGroupList& Childs();
-	const DownloadGroupList& Childs() const;
-
-    DECLARE_DYNAMIC_CLASS(DownloadGroup);
+    //DECLARE_DYNAMIC_CLASS(DownloadGroup);
 private:
-	
+
+	int m_id;	
 	wxString m_name;
 	wxString m_folder;
+	wxString m_icon;
 	wxStringList m_exts;
-
-	DownloadGroupList m_childs;
 };
 
 #endif // DOWNLOAD_GROUP_H

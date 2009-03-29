@@ -259,6 +259,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\DownloadGroup.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DownloadGroup.h"
+				>
+			</File>
+			<File
 				RelativePath=".\DownloadGroupWnd.cpp"
 				>
 			</File>
@@ -280,6 +288,14 @@
 			</File>
 			<File
 				RelativePath=".\DownloadTaskWnd.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GroupEditor.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GroupEditor.h"
 				>
 			</File>
 			<File
@@ -383,14 +399,6 @@
 				</File>
 			</Filter>
 		</Filter>
-		<File
-			RelativePath=".\DownloadGroup.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\DownloadGroup.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
