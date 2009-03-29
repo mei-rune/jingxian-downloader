@@ -7,6 +7,7 @@
 
 #include "pre_config.h"
 #include "DownloadFrame.h"
+#include "VirtualFileSystem.h"
 
 ///////////////////////////////////////////////////////////////////////////
 DownloadFrame::DownloadFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
@@ -23,8 +24,16 @@ DownloadFrame::DownloadFrame( wxWindow* parent, wxWindowID id, const wxString& t
 	wxSplitterWindow* mainSplitter = new wxSplitterWindow( this, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), 0 );
 	//mainSplitter->Connect( wxEVT_IDLE, wxIdleEventHandler( DownloadFrame::on_splitterOnIdle ), NULL, this );
 
-	
-	m_download_group_wnd = new DownloadGroupWnd( mainSplitter );
+	wxXmlDocument doc;
+	if (doc.Load( VirtualFileSystem::Get().GetConfig( VirtualFileSystem::DOWNLOAD_GROUPS ).GetFullPath() ))
+	{
+		m_download_group_wnd = new DownloadGroupWnd( doc.GetRoot() , mainSplitter );
+	}
+	else
+	{
+		m_download_group_wnd = new DownloadGroupWnd( 0, mainSplitter );
+	}
+
 	m_download_task_wnd = new DownloadTaskWnd( mainSplitter );
 
 	mainSplitter->SplitVertically(m_download_group_wnd, m_download_task_wnd, 150 );

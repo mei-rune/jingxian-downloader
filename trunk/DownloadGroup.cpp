@@ -12,8 +12,8 @@
 #include "DownloadGroup.h"
 
 
-IMPLEMENT_DYNAMIC_CLASS(DownloadGroup, wxObject);
-WX_DEFINE_LIST(DownloadGroupList);
+//IMPLEMENT_DYNAMIC_CLASS(DownloadGroup, wxObject);
+//WX_DEFINE_LIST(DownloadGroupList);
 
 DownloadGroup::DownloadGroup(void)
 {
@@ -40,11 +40,6 @@ DownloadGroup::DownloadGroup(const wxChar* nm, const wxChar* folder, const wxStr
 
 DownloadGroup::~DownloadGroup(void)
 {
-#if !wxUSE_STL
-        m_childs.DeleteContents(true);
-#else
-        WX_CLEAR_LIST(DownloadGroupList, m_childs);
-#endif
 }
 
 const wxString& DownloadGroup::Name() const
@@ -75,15 +70,4 @@ wxStringList& DownloadGroup::Exts()
 const wxStringList& DownloadGroup::Exts() const
 {
 	return m_exts;
-}
-
-
-DownloadGroupList& DownloadGroup::Childs()
-{
-	return m_childs;
-}
-
-const DownloadGroupList& DownloadGroup::Childs() const
-{
-	return m_childs;
 }
